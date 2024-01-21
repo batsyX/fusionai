@@ -77,7 +77,7 @@ const Page = () => {
           {
             loading && (
               
-              <div className="grid grid-cols-4 max-md:grid-cols-3 max-sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-4 max-md:grid-cols-3 max-sm:grid-cols-1 gap-4">
                       <Skeleton  className="bg-gray-300 w-[200px] h-[200px] rounded-xl p-3"/>
                       <Skeleton  className="bg-gray-300 w-[200px] h-[200px] rounded-xl p-3"/>
                       <Skeleton  className="bg-gray-300 w-[200px] h-[200px] rounded-xl p-3"/>
