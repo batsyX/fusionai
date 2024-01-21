@@ -94,7 +94,7 @@ const Page = () => {
       imageArray.length>0 &&
         imageArray.map(image=>(
           
-            <img className="w-[400px] h-[400px] object-cover rounded-xl" src={image} alt="image"/>
+            <img key={image} className="w-[400px] h-[400px] object-cover rounded-xl" src={image} alt="image"/>
           
         ))
     }
