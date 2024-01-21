@@ -89,7 +89,7 @@ const Page = () => {
           }
         </div>
     </div>
-    <div className="w-full min-h-96 px-10 py-20 grid grid-cols-4 max-md:grid-cols-2 gap-4">
+    <div className="w-full min-h-96 px-10 py-20 grid grid-cols-4 max-md:grid-cols-2 max-sm:grid-cols-1 gap-4">
     {!loading &&
       imageArray.length>0 &&
         imageArray.map(image=>(
