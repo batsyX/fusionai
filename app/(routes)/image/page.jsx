@@ -28,11 +28,10 @@ const Page = () => {
     setLoading(true);
     try {
       const response =await axios.post('/api/image',{
-        prompt:prompt,
-        num_outputs:output
+        prompt:prompt
       })
-      console.log(response.data);
-      setImageArray(...imageArray,response.data);
+      const img=response.data[0].url;
+      setImageArray([...imageArray,{url:img}]);
     } catch (error) {
       console.log(error)
     }finally{
@@ -60,7 +59,7 @@ const Page = () => {
       <form onSubmit={handleSubmit} className="flex max-md:flex-col items-center gap-4" >
         <div className="w-full flex flex-col  gap-4">
           <input placeholder="An astronaut flying in space" onChange={handleChange} name="prompts" value={prompt} type="text" className="text-xl w-full border-0 border-b-2 border-gray-200 focus:outline-none focus:border-gray-400 py-3 px-1" required/>
-          <div className="flex items-center gap-3">
+{/*           <div className="flex items-center gap-3">
             <label htmlFor="output">No of Outputs</label>
             <select value={output} onChange={handleChange} name="outputs" className="w-20 transform duration-700 rounded-xl border border-green-500 outline-none py-2">
                 <option value="1">1</option>
@@ -68,7 +67,7 @@ const Page = () => {
                 <option value="3">3</option>
                 <option value="4">4</option>
             </select>
-          </div>
+          </div> */}
           <button className="w-32 bg-gradient-to-br from-green-400 to-blue-400 font-bold text-white p-2 rounded-xl max-md:w-full" type="submit">Generate</button>
         </div>
       </form>
@@ -79,9 +78,9 @@ const Page = () => {
               
               <div className="grid grid-cols-4 max-md:grid-cols-3 max-sm:grid-cols-1 gap-4">
                       <Skeleton  className="bg-gray-300 w-[200px] h-[200px] rounded-xl p-3"/>
+{/*                       <Skeleton  className="bg-gray-300 w-[200px] h-[200px] rounded-xl p-3"/>
                       <Skeleton  className="bg-gray-300 w-[200px] h-[200px] rounded-xl p-3"/>
-                      <Skeleton  className="bg-gray-300 w-[200px] h-[200px] rounded-xl p-3"/>
-                      <Skeleton  className="bg-gray-300 w-[200px] h-[200px] rounded-xl p-3"/>
+                      <Skeleton  className="bg-gray-300 w-[200px] h-[200px] rounded-xl p-3"/> */}
                   
               </div>
               
@@ -89,12 +88,12 @@ const Page = () => {
           }
         </div>
     </div>
-    <div className="w-full min-h-96 px-10 py-20 grid grid-cols-4 max-md:grid-cols-2 max-sm:grid-cols-1 gap-4">
+    <div className="w-full min-h-96 px-10 py-20 text-center">
     {!loading &&
       imageArray.length>0 &&
         imageArray.map(image=>(
           
-            <img key={image} className="w-[400px] h-[400px] object-cover rounded-xl" src={image} alt="image"/>
+            <img key={image} className="w-[400px] h-[400px] object-cover rounded-xl" src={image.url} alt="image"/>
           
         ))
     }
