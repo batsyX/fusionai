@@ -24,8 +24,12 @@ const Page = () => {
         body: JSON.stringify({ prompt: prompt,voice:voice }), // Pass text to the API
       });
       const blob = await response.blob();
-      const audioUrl = URL.createObjectURL(blob);
-      setSpeechArray([...speechArray, { audioUrl: audioUrl }]);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64Audio = reader.result.split(",")[1]; // Extract Base64 string
+        setSpeechArray([...speechArray, { prompt: prompt, audioBase64: base64Audio }]);
+      };
+      reader.readAsDataURL(blob);
     } catch (error) {
       console.log(error);
     } finally {
@@ -91,9 +95,12 @@ const Page = () => {
         {!loading &&
           speechArray.length > 0 &&
           speechArray.map((item, idx) => (
-            <audio key={idx} controls className="w-full">
-              <source src={item.audioUrl} type="audio/mpeg" />
-            </audio>
+            <div className="flex flex-col gap-3 py-3 px-1 rounded-xl">
+                <p className="mx-3"><span className="font-extrabold ">Prompt : </span>{item.prompt}</p>
+                <audio key={idx} controls className="w-full">
+                  <source src={`data:audio/mpeg;base64,${item.audioBase64}`} type="audio/mpeg" />
+                </audio>
+            </div>
           ))}
       </div>
     </>
