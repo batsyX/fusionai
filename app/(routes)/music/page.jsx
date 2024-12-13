@@ -1,6 +1,6 @@
 "use client"
 import { Music2Icon } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from 'axios'
 import { Skeleton } from "@/components/ui/skeleton"
 import { useMessageArray } from "@/context/MessageArrayContext"
@@ -37,7 +37,18 @@ const Page = () => {
     
   }
 
+  useEffect(() => {
+    const data = localStorage.getItem("musicArray");
+    if (data) {
+      setMusicArray(JSON.parse(data));
+    }
+  }, [setMusicArray]);
 
+  useEffect(() => {
+    if (musicArray.length > 0) {
+      localStorage.setItem("musicArray", JSON.stringify(musicArray));
+    }
+  }, [musicArray]);
 
 
   return (

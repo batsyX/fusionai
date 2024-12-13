@@ -12,6 +12,7 @@ export  async function POST(req, res) {
         model: "gpt-3.5-turbo",
       });
       const response=(completion.choices[0]);
+      console.log(response);
      return NextResponse.json(response);
     } catch (error) {
         console.log(error);

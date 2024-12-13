@@ -1,5 +1,5 @@
 "use client"
-import { HomeIcon, ImageIcon, MessageSquareIcon, Music2Icon, VideoIcon } from "lucide-react"
+import { HomeIcon, ImageIcon, MessageSquareIcon, Music2Icon, VideoIcon ,SpeechIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -24,7 +24,14 @@ const links=[
         icon:<ImageIcon />,
         color:"text-green-400",
         
-    },{
+    },
+    {
+        name:"Text to speech",
+        href:"/text-to-speech",
+        icon:<SpeechIcon />,
+        color:"text-yellow-500",
+    },
+    {
         name:"Video",
         href:"/video",
         icon:<VideoIcon />,

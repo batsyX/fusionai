@@ -1,5 +1,5 @@
 "use client"
-import { useContext,createContext,useState } from "react";
+import { useContext,createContext,useState, useEffect } from "react";
 
 const MessageArrayContext = createContext();
 
@@ -8,9 +8,10 @@ const MessageArrayProvider = ({ children }) => {
     const [imageArray, setImageArray] = useState([]);
     const [musicArray, setMusicArray] = useState([]);
     const [videoArray, setVideoArray] = useState([]);
-    
+    const [speechArray, setSpeechArray] = useState([]);
+
     return (
-        <MessageArrayContext.Provider value={{ messageArray, setMessageArray,imageArray, setImageArray,musicArray,setMusicArray,videoArray,setVideoArray }}>
+        <MessageArrayContext.Provider value={{ messageArray, setMessageArray,imageArray, setImageArray,musicArray,setMusicArray,videoArray,setVideoArray,speechArray,setSpeechArray }}>
         {children}
         </MessageArrayContext.Provider>
     );

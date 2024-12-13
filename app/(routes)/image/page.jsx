@@ -1,9 +1,11 @@
 "use client"
 import { ArrowBigRightIcon, BotIcon, ImageIcon, MessageSquareIcon, User2Icon, UserRoundIcon } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from 'axios'
 import { Skeleton } from "@/components/ui/skeleton"
 import { useMessageArray } from "@/context/MessageArrayContext"
+import { saveAs } from "file-saver";
+
 
 
 const Page = () => {
@@ -40,10 +42,22 @@ const Page = () => {
     }
     
   }
+  const handleDownload = (url) => {
+    saveAs(url, "generated-image.png"); // Downloads the file with the specified filename
+  };
+  
+  useEffect(() => {
+    const data = localStorage.getItem("imageArray");
+    if (data) {
+      setImageArray(JSON.parse(data));
+    }
+  }, [setImageArray]);
 
-
-
-
+  useEffect(() => {
+    if (imageArray.length > 0) {
+      localStorage.setItem("imageArray", JSON.stringify(imageArray));
+    }
+  }, [imageArray]);
   return (
     <>
       <div className="flex gap-2 items-center py-6 px-7">
@@ -88,12 +102,21 @@ const Page = () => {
           }
         </div>
     </div>
-    <div className="w-full min-h-96 px-10 py-20 text-center">
+    <div className="w-full min-h-96 px-10 py-20 text-center  gap-5 flex flex-wrap flex-shrink ">
     {!loading &&
       imageArray.length>0 &&
         imageArray.map(image=>(
           
-            <img key={image} className="w-[400px] h-[400px] object-cover rounded-xl" src={image.url} alt="image"/>
+            <div key={image.url} className=" bg-gray-200 rounded-xl flex flex-col py-5 gap-5 items-center justify-center w-[250px]">
+              <img  className="w-[200px] h-[200px] object-cover rounded-xl" src={image.url} alt="image"/>
+              <div>
+                <button className="bg-gradient-to-tr from-green-400 to-blue-400 px-10 py-2 rounded-xl text-white hover:scale-105 transition-all duration-200"
+                onClick={() => handleDownload(image.url)}
+                >
+                  Download
+                </button>
+              </div>
+            </div>
           
         ))
     }

@@ -1,10 +1,10 @@
 "use client"
 import { ArrowBigRightIcon, BotIcon, MessageSquareIcon, User2Icon, UserRoundIcon } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from 'axios'
 import { useMessageArray } from "@/context/MessageArrayContext"
 import { Skeleton } from "@/components/ui/skeleton"
-
+import FormatMessageContent from "@/utils/FormatChecker"
 
 const Page = () => {
   const { messageArray, setMessageArray } = useMessageArray();
@@ -31,6 +31,18 @@ const Page = () => {
       setLoading(false);
     }
   }
+  useEffect(() => {
+    const data = localStorage.getItem("messageArray");
+    if (data) {
+      setMessageArray(JSON.parse(data));
+    }
+  }, [setMessageArray]);
+
+  useEffect(() => {
+    if (messageArray.length > 0) {
+      localStorage.setItem("messageArray", JSON.stringify(messageArray));
+    }
+  }, [messageArray]);
 
   return (
     <>
@@ -53,23 +65,27 @@ const Page = () => {
       {
         loading && (
           
-          <Skeleton className=" h-[30px] rounded-full bg-slate-300" />  
+          <Skeleton className=" h-[30px] w-[300px] rounded-full bg-slate-300" />  
           
         )
       }
     </div>
     </div>
-    <div className="px-5 pt-16  min-h-32 flex flex-col gap-4">
+    <div className="px-5 py-16  min-h-32 flex flex-col gap-4">
       {
         messageArray && messageArray.map((message,index) => (
-          <div key={index} className={`flex items-center gap-2 ${message.role==='user'?' float-right':' float-left'}`}>
-            <div className={`text-${message.role==="user"?"green":"red"}-500 bg-${message.role==="user"?"green":"red"}-100 p-3 rounded-xl`}>
+          <div key={index} className={`flex items-center gap-2 ${message.role==='user'?'justify-end ':null} `}>
+            <div className={`text-${message.role==="user"?"green":"red"}-500 bg-${message.role==="user"?"green":"red"}-100 p-3 rounded-xl `}>
               {
                 message.role==="user"?<UserRoundIcon size={22} />:<BotIcon size={22} />
               }
             </div>
             <div className="flex flex-col gap-1">
-              <p className="text-xl ">{message.content}</p>
+              <span className="text-xl ">
+                {
+                  FormatMessageContent(message.content)
+                }
+              </span>
             </div>
           </div>
         ))
