@@ -1,4 +1,5 @@
 "use client"
+import { useMessageArray } from "@/context/MessageArrayContext"
 import { HomeIcon, ImageIcon, MessageSquareIcon, Music2Icon, VideoIcon ,SpeechIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -48,7 +49,10 @@ const links=[
 ]
 
 const Sidebar = () => {
-    const path=usePathname()
+    const path=usePathname();
+
+    // const {generations}=useMessageArray();
+
   return (
     <div className="flex flex-col gap-2 h-full bg-gray-900">
         <Link href="/" className="flex items-center gap-5">
@@ -68,6 +72,7 @@ const Sidebar = () => {
                     )
                 })
             }
+            {/* <h3>{generations}</h3> */}
         </div>
     </div>
   )

@@ -9,9 +9,10 @@ const MessageArrayProvider = ({ children }) => {
     const [musicArray, setMusicArray] = useState([]);
     const [videoArray, setVideoArray] = useState([]);
     const [speechArray, setSpeechArray] = useState([]);
+    const [generations, setGenerations] = useState(0);
 
     return (
-        <MessageArrayContext.Provider value={{ messageArray, setMessageArray,imageArray, setImageArray,musicArray,setMusicArray,videoArray,setVideoArray,speechArray,setSpeechArray }}>
+        <MessageArrayContext.Provider value={{ messageArray, setMessageArray,imageArray, setImageArray,musicArray,setMusicArray,videoArray,setVideoArray,speechArray,setSpeechArray,generations,setGenerations }}>
         {children}
         </MessageArrayContext.Provider>
     );

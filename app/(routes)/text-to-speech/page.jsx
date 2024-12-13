@@ -7,7 +7,7 @@ import { useMessageArray } from "@/context/MessageArrayContext";
 const Page = () => {
   const [prompt, setPrompt] = useState("");
   const [voice, setVoice] = useState("shimmer");
-  const { speechArray, setSpeechArray } = useMessageArray();
+  const { speechArray, setSpeechArray,setGenerations } = useMessageArray();
   const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
     setPrompt(e.target.value);
@@ -30,6 +30,7 @@ const Page = () => {
         setSpeechArray([...speechArray, { prompt: prompt, audioBase64: base64Audio }]);
       };
       reader.readAsDataURL(blob);
+      setGenerations((prev) => prev + 1);
     } catch (error) {
       console.log(error);
     } finally {
@@ -95,9 +96,9 @@ const Page = () => {
         {!loading &&
           speechArray.length > 0 &&
           speechArray.map((item, idx) => (
-            <div className="flex flex-col gap-3 py-3 px-1 rounded-xl">
+            <div key={idx} className="flex flex-col gap-3 py-3  rounded-b-3xl  rounded-t-xl border-2">
                 <p className="mx-3"><span className="font-extrabold ">Prompt : </span>{item.prompt}</p>
-                <audio key={idx} controls className="w-full">
+                <audio  controls className="w-full ">
                   <source src={`data:audio/mpeg;base64,${item.audioBase64}`} type="audio/mpeg" />
                 </audio>
             </div>

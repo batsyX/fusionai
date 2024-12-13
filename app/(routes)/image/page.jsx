@@ -13,7 +13,7 @@ const Page = () => {
   const [prompt, setPrompt] = useState('')
   const [output, setOutput] = useState(1)
 
-  const {imageArray, setImageArray}=useMessageArray();
+  const {imageArray, setImageArray,setGenerations}=useMessageArray();
   
   const [loading, setLoading] = useState(false)
 
@@ -34,6 +34,7 @@ const Page = () => {
       })
       const img=response.data[0].url;
       setImageArray([...imageArray,{url:img}]);
+      setGenerations((prev)=>prev+1)
     } catch (error) {
       console.log(error)
     }finally{
