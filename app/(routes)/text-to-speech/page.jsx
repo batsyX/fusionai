@@ -1,13 +1,12 @@
 "use client";
-import { ArrowBigRightIcon, Music2Icon, ScrollText } from "lucide-react";
+import { ArrowBigRightIcon,  ScrollText, } from "lucide-react";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useMessageArray } from "@/context/MessageArrayContext";
 
 const Page = () => {
   const [prompt, setPrompt] = useState("");
-
+  const [voice, setVoice] = useState("shimmer");
   const { speechArray, setSpeechArray } = useMessageArray();
   const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
@@ -22,7 +21,7 @@ const Page = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ prompt: prompt }), // Pass text to the API
+        body: JSON.stringify({ prompt: prompt,voice:voice }), // Pass text to the API
       });
       const blob = await response.blob();
       const audioUrl = URL.createObjectURL(blob);
@@ -70,9 +69,10 @@ const Page = () => {
             type="text"
             className="text-xl w-full h-96 border-2 border-b-2 border-gray-200 focus:outline-none focus:border-gray-400 py-3 px-1 resize-none rounded-xl"
           />
-          <select name="chooseVoice" id="" className="px-10 py-3 rounded-xl border outline-none" onChange={handleChange}>
+          <select name="chooseVoice" id="" className="px-10 py-3 rounded-xl border outline-none" value={voice} onChange={(e) => setVoice(e.target.value)}>
             <option value="shimmer">Shimmer</option>
             <option value="alloy">Alloy</option>
+            <option value="nova">Nova</option>
           </select>
           <button
             className=" bg-gradient-to-r from-yellow-400 to-orange-500 text-white p-2 rounded-xl"
