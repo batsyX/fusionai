@@ -3,17 +3,27 @@ import { ArrowBigRightIcon,  ScrollText, } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useMessageArray } from "@/context/MessageArrayContext";
+import Swal from "sweetalert2";
 
 const Page = () => {
   const [prompt, setPrompt] = useState("");
   const [voice, setVoice] = useState("shimmer");
-  const { speechArray, setSpeechArray,setGenerations } = useMessageArray();
+  const { speechArray, setSpeechArray,credits,setCredits } = useMessageArray();
   const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
     setPrompt(e.target.value);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(credits==0){
+      Swal.fire({
+                  title: "All free Credits exhausted",
+                  text: "Get the premeium plan to get more credits",
+                  icon: "warning",
+                  confirmButtonColor: "#3085d6",
+                });
+      return;
+    }
     setLoading(true);
     try {
       const response = await fetch("/api/text-to-speech", {
@@ -30,7 +40,7 @@ const Page = () => {
         setSpeechArray([...speechArray, { prompt: prompt, audioBase64: base64Audio }]);
       };
       reader.readAsDataURL(blob);
-      setGenerations((prev) => prev + 1);
+      setCredits((prev) => prev - 1);
     } catch (error) {
       console.log(error);
     } finally {

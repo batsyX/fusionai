@@ -8,7 +8,7 @@ import Image from "next/image";
 
 const Layout = ({ children }) => {
   return (
-    <>
+    <MessageArrayProvider>
       <div className="z-20 fixed top-0 w-full bg-[#1f1f1e] border-b border-[rgba(255,255,255,0.16)] h-16 flex items-center justify-between px-3">
         <div>
           <Link href="/" className="flex items-center gap-5">
@@ -18,7 +18,9 @@ const Layout = ({ children }) => {
               src="/logo.png"
               className=" py-5 pl-5 max-md:hidden"
             />
-            <h2 className="text-white text-2xl font-bauhaus max-md:pl-10">Fusion AI</h2>
+            <h2 className="text-white text-2xl font-bauhaus max-md:pl-10">
+              Fusion AI
+            </h2>
           </Link>
         </div>
         <div className="">
@@ -41,9 +43,9 @@ const Layout = ({ children }) => {
         </Sheet>
       </div>
       <div className="md:ml-80 h-full max-md:pt-20">
-        <MessageArrayProvider>{children}</MessageArrayProvider>
+        {children}
       </div>
-    </>
+      </MessageArrayProvider>
   );
 };
 

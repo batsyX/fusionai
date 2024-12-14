@@ -10,9 +10,10 @@ import axios from "axios";
 import { useMessageArray } from "@/context/MessageArrayContext";
 import { Skeleton } from "@/components/ui/skeleton";
 import FormatMessageContent from "@/utils/FormatChecker";
+import Swal from "sweetalert2";
 
 const Page = () => {
-  const { messageArray, setMessageArray } = useMessageArray();
+  const { messageArray, setMessageArray,credits,setCredits } = useMessageArray();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -21,6 +22,15 @@ const Page = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(credits==0){
+      Swal.fire({
+                  title: "All free Credits exhausted",
+                  text: "Get the premeium plan to get more credits",
+                  icon: "warning",
+                  confirmButtonColor: "#3085d6",
+                });
+      return;
+    }
     setLoading(true);
     setMessageArray([...messageArray, { role: "user", content: message }]);
 
@@ -31,6 +41,7 @@ const Page = () => {
         ...prev,
         { role: "system", content: response.data.message.content },
       ]);
+      setCredits(prev=>prev-1)
     } catch (error) {
       console.log(error);
     } finally {
@@ -105,9 +116,9 @@ const Page = () => {
             </div>
           ))}
       </div>
-      <div className="absolute bottom-10 left-5 right-5">
+      <div className="ml-5">
           {loading && (
-            <Skeleton className=" h-[30px] w-[300px] rounded-full bg-slate-300" />
+            <Skeleton className=" h-[30px] w-[300px] rounded-full bg-slate-600" />
           )}
         </div>
       <div className="fixed bottom-0 md:left-80 left-0 right-0 px-5 bg-[#1f1f1e] py-2">

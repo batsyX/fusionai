@@ -5,6 +5,7 @@ import axios from 'axios'
 import { Skeleton } from "@/components/ui/skeleton"
 import { useMessageArray } from "@/context/MessageArrayContext"
 import { saveAs } from "file-saver";
+import Swal from "sweetalert2"
 
 
 
@@ -13,7 +14,7 @@ const Page = () => {
   const [prompt, setPrompt] = useState('')
   const [output, setOutput] = useState(1)
 
-  const {imageArray, setImageArray,setGenerations}=useMessageArray();
+  const {imageArray, setImageArray,credits,setCredits}=useMessageArray();
   
   const [loading, setLoading] = useState(false)
 
@@ -27,6 +28,15 @@ const Page = () => {
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(credits==0){
+      Swal.fire({
+            title: "All free Credits exhausted",
+            text: "Get the premeium plan to get more credits",
+            icon: "warning",
+            confirmButtonColor: "#3085d6",
+          });
+      return;
+    }
     setLoading(true);
     try {
       const response =await axios.post('/api/image',{
@@ -34,7 +44,7 @@ const Page = () => {
       })
       const img=response.data[0].url;
       setImageArray([...imageArray,{url:img}]);
-      setGenerations((prev)=>prev+1)
+      setCredits((prev)=>prev-1)
     } catch (error) {
       console.log(error)
     }finally{

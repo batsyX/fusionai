@@ -4,6 +4,7 @@ import { useState } from "react"
 import axios from 'axios'
 import { Skeleton } from "@/components/ui/skeleton"
 import { useMessageArray } from "@/context/MessageArrayContext"
+import Swal from "sweetalert2"
 
 
 const Page = () => {
@@ -25,6 +26,13 @@ const Page = () => {
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
+    Swal.fire({
+      title: "Not a premium user",
+      text: "You need to be a premium user to generate videos. Please upgrade to premium to generate videos.",
+      icon: "warning",
+      confirmButtonColor: "#3085d6",
+    });
+    return;
     setLoading(true);
     try {
       const response =await axios.post('/api/video',{prompt:prompt })

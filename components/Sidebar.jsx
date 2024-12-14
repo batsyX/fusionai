@@ -1,9 +1,9 @@
 "use client"
-import { useMessageArray } from "@/context/MessageArrayContext"
 import { HomeIcon, ImageIcon, MessageSquareIcon, Music2Icon, VideoIcon ,SpeechIcon,CrownIcon } from "lucide-react"
-import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useMessageArray } from "@/context/MessageArrayContext"
+import { useEffect } from "react"
 
 
 const links=[
@@ -50,9 +50,13 @@ const links=[
 
 const Sidebar = () => {
     const path=usePathname();
+    const {credits}=useMessageArray();
 
-    // const {generations}=useMessageArray();
-
+    useEffect(()=>{
+        if(credits==0){
+            alert("You have exceeded the limit of generations")
+        }
+    },[credits])
   return (
     <div className="flex flex-col gap-2 h-full bg-[#1f1f1e] border-r border-[rgba(255,255,255,0.16)] ">
         
@@ -72,7 +76,7 @@ const Sidebar = () => {
         </div>
         <div className="w-full flex flex-col gap-4 items-center justify-center py-4 text-gray-400">
                 <div>
-                    <h3>Free plan : <span className={`text-green-400`}>10 credits</span></h3>
+                    <h3>Free plan : <span className={`text-green-400`}>{credits} credits left</span></h3>
                 </div>
                 <div>
                     <button className="px-7 py-2 rounded-xl bg-gradient-to-r from-purple-400 to-blue-400 text-white flex gap-3 items-center">
