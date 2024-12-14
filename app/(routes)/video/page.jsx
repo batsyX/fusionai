@@ -9,9 +9,7 @@ import { useMessageArray } from "@/context/MessageArrayContext"
 const Page = () => {
 
   const [prompt, setPrompt] = useState('')
-  const [frames, setFrames] = useState(48)
-  const [rate, setRate] = useState(5)
-
+  const {setGenerations}=useMessageArray();
   const {videoArray,setVideoArray}=useMessageArray();
   const [loading, setLoading] = useState(false)
 
@@ -29,13 +27,11 @@ const Page = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response =await axios.post('/api/video',{
-        prompt:prompt,
-        num_frames:frames,
-        fps:rate
-      })
-      console.log(response.data);
-      setVideoArray([...videoArray,response.data]);
+      const response =await axios.post('/api/video',{prompt:prompt })
+      const newRes=await axios.get('/api/video');
+      console.log(newRes.data)
+      setVideoArray([...videoArray,newRes.data]);
+      setGenerations(prev=>prev+1);
     } catch (error) {
       console.log(error)
     }finally{
@@ -49,7 +45,7 @@ const Page = () => {
 
 
   return (
-    <>
+    <div className="pt-16 text-white ">
       <div className="flex gap-2 items-center py-6 px-7">
       <div className="text-blue-500 bg-blue-100 p-3 rounded-xl">
         <VideoIcon size={32} />
@@ -62,26 +58,9 @@ const Page = () => {
     <div className="relative px-5">
       <form onSubmit={handleSubmit} className="flex max-md:flex-col items-center gap-4" >
         <div className="w-full flex flex-col  gap-4">
-        <input onChange={handleChange} name="prompts" value={prompt} type="text" className="text-xl w-full border-0 border-b-2 border-gray-200 focus:outline-none focus:border-gray-400 py-3 px-1" required/>
-        <div className="flex items-center gap-3">
-          <label htmlFor="frames">No of Frames</label>
-          <select value={frames} onChange={handleChange} name="frames" className="w-20 transform duration-700 rounded-xl border border-green-500 outline-none py-2">
-              <option value="48">48</option>
-              <option value="96">96</option>
-              <option value="120">120</option>
-              <option value="168">168</option>
-          </select>
-        </div>
-        <div className="flex items-center gap-3">
-          <label htmlFor="rate">Frame rate</label>
-          <select value={rate} onChange={handleChange} name="rate" className="w-20 transform duration-700 rounded-xl border border-green-500 outline-none py-2">
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="16">16</option>
-              <option value="24">24</option>
-              
-          </select>
-        </div>
+        <input onChange={handleChange} name="prompts" value={prompt} type="text" className="text-xl w-full rounded-xl bg-gray-800 border-0 border-b-2 border-gray-600 focus:outline-none focus:border-gray-500 py-3 px-1" required autoComplete="off"/>
+        
+        
         <button className="w-32 bg-gradient-to-br  from-blue-200 to-blue-500 text-white font-bold p-2 rounded-xl max-md:w-full" type="submit">Generate</button>
         </div>
       </form>
@@ -111,7 +90,7 @@ const Page = () => {
     }
     </div>
     
-    </>
+    </div>
   )
 }
 

@@ -52,7 +52,7 @@ const Page = () => {
   }, [speechArray]);
 
   return (
-    <>
+    <div className="pt-16 text-white">
       <div className="flex gap-2 items-center py-6 px-7">
         <div className="text-yellow-600 bg-yellow-100 p-3 rounded-xl">
           <ScrollText size={32} />
@@ -61,7 +61,7 @@ const Page = () => {
           <h1 className="text-2xl font-bauhaus font-bold">
             Generate Authentic voices from your texts
           </h1>
-          <p className="text-gray-500 font-writing">With 2 different voices</p>
+          <p className="text-gray-500 font-writing">With 3 different voices</p>
         </div>
       </div>
       <div className="relative px-5">
@@ -72,9 +72,9 @@ const Page = () => {
             onChange={handleChange}
             value={prompt}
             type="text"
-            className="text-xl w-full h-96 border-2 border-b-2 border-gray-200 focus:outline-none focus:border-gray-400 py-3 px-1 resize-none rounded-xl"
+            className="  text-xl w-full h-96 bg-gray-800 border-2 border-b-2 border-gray-600 focus:outline-none  py-3 px-1 resize-none rounded-xl"
           />
-          <select name="chooseVoice" id="" className="px-10 py-3 rounded-xl border outline-none" value={voice} onChange={(e) => setVoice(e.target.value)}>
+          <select name="chooseVoice" id="" className="bg-gray-800 px-10 py-3 rounded-xl border outline-none border-none" value={voice} onChange={(e) => setVoice(e.target.value)}>
             <option value="shimmer">Shimmer</option>
             <option value="alloy">Alloy</option>
             <option value="nova">Nova</option>
@@ -96,15 +96,15 @@ const Page = () => {
         {!loading &&
           speechArray.length > 0 &&
           speechArray.map((item, idx) => (
-            <div key={idx} className="flex flex-col gap-3 py-3  rounded-b-3xl  rounded-t-xl border-2">
-                <p className="mx-3"><span className="font-extrabold ">Prompt : </span>{item.prompt}</p>
-                <audio  controls className="w-full ">
+            <div key={idx} className="flex flex-col gap-3 pt-3   rounded-xl border-2 border-gray-500 overflow-hidden">
+                <p className="mx-3 text-gray-400"><span className="font-extrabold text-white">Prompt : </span>{item.prompt}</p>
+                <audio  controls className="w-full bg-gray-100 rounded-b-xl">
                   <source src={`data:audio/mpeg;base64,${item.audioBase64}`} type="audio/mpeg" />
                 </audio>
             </div>
           ))}
       </div>
-    </>
+    </div>
   );
 };
 

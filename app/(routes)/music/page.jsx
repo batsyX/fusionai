@@ -52,7 +52,7 @@ const Page = () => {
 
 
   return (
-    <>
+    <div className="pt-16 text-white">
       <div className="flex gap-2 items-center py-6 px-7">
       <div className="text-purple-600 bg-purple-100 p-3 rounded-xl">
         <Music2Icon size={32} />
@@ -65,7 +65,7 @@ const Page = () => {
     <div className="relative px-5">
       <form onSubmit={handleSubmit} className="flex max-md:flex-col items-center gap-4" >
         <div className="w-full flex flex-col max-md:flex-row gap-4">
-        <input onChange={handleChange} name="prompts" value={prompt} type="text" className="text-xl w-full border-0 border-b-2 border-gray-200 focus:outline-none focus:border-gray-400 py-3 px-1" required/>
+        <input onChange={handleChange} name="prompts" value={prompt} type="text" className="text-xl w-full rounded-xl bg-gray-800 border-0 border-b-2 border-gray-600 focus:outline-none focus:border-gray-500 py-3 px-1" required autoComplete="off"/>
         
         </div>
         <button className=" bg-gradient-to-br from-purple-400 to-pink-600 font-bold text-white p-2 rounded-xl max-md:w-full" type="submit">Generate</button>
@@ -92,7 +92,7 @@ const Page = () => {
     }
     </div>
     
-    </>
+    </div>
   )
 }
 

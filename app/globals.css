@@ -8,4 +8,16 @@
  
 html,body,:root{
   height: 100%;
+  background: #161716;
+}
+.home-box{
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), linear-gradient(140.03deg, rgba(78, 64, 243, 0.8) -0.4%, rgba(0, 94, 255, 0) 10.34%, rgba(128, 31, 255, 0.08) 72.12%, rgba(191, 0, 255, 0.24) 108.91%);
+}
+audio {
+  width: 100%;
+  background-color: transparent; /* Keep background matching the container */
+  border: none; /* Remove default border */
+}
+button,a,select,.clickable{
+  cursor: url('/2080-glove-cursor.svg') 16 16,auto;
 }

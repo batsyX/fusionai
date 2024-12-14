@@ -60,7 +60,7 @@ const Page = () => {
     }
   }, [imageArray]);
   return (
-    <>
+    <div className="pt-16 text-white">
       <div className="flex gap-2 items-center py-6 px-7">
       <div className="text-green-500 bg-green-100 p-3 rounded-xl">
         <ImageIcon size={32} />
@@ -73,16 +73,10 @@ const Page = () => {
     <div className="relative px-5">
       <form onSubmit={handleSubmit} className="flex max-md:flex-col items-center gap-4" >
         <div className="w-full flex flex-col  gap-4">
-          <input placeholder="An astronaut flying in space" onChange={handleChange} name="prompts" value={prompt} type="text" className="text-xl w-full border-0 border-b-2 border-gray-200 focus:outline-none focus:border-gray-400 py-3 px-1" required/>
-{/*           <div className="flex items-center gap-3">
-            <label htmlFor="output">No of Outputs</label>
-            <select value={output} onChange={handleChange} name="outputs" className="w-20 transform duration-700 rounded-xl border border-green-500 outline-none py-2">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
-          </div> */}
+          <input placeholder="An astronaut flying in space" onChange={handleChange} name="prompts" value={prompt} type="text" className="text-xl w-full rounded-xl bg-gray-800 border-0 border-b-2 border-gray-600 focus:outline-none focus:border-gray-500 py-3 px-1" required
+          autoComplete="off"
+          />
+
           <button className="w-32 bg-gradient-to-br from-green-400 to-blue-400 font-bold text-white p-2 rounded-xl max-md:w-full" type="submit">Generate</button>
         </div>
       </form>
@@ -92,11 +86,7 @@ const Page = () => {
             loading && (
               
               <div className="grid grid-cols-4 max-md:grid-cols-3 max-sm:grid-cols-1 gap-4">
-                      <Skeleton  className="bg-gray-300 w-[200px] h-[200px] rounded-xl p-3"/>
-{/*                       <Skeleton  className="bg-gray-300 w-[200px] h-[200px] rounded-xl p-3"/>
-                      <Skeleton  className="bg-gray-300 w-[200px] h-[200px] rounded-xl p-3"/>
-                      <Skeleton  className="bg-gray-300 w-[200px] h-[200px] rounded-xl p-3"/> */}
-                  
+                      <Skeleton  className="bg-gray-300 w-[200px] h-[200px] rounded-xl p-3"/>                  
               </div>
               
             )
@@ -108,7 +98,7 @@ const Page = () => {
       imageArray.length>0 &&
         imageArray.map(image=>(
           
-            <div key={image.url} className=" bg-gray-200 rounded-xl flex flex-col py-5 gap-5 items-center justify-center w-[250px]">
+            <div key={image.url} className=" bg-white bg-opacity-5 rounded-xl flex flex-col py-5 gap-5 items-center justify-center w-[250px]">
               <img  className="w-[200px] h-[200px] object-cover rounded-xl" src={image.url} alt="image"/>
               <div>
                 <button className="bg-gradient-to-tr from-green-400 to-blue-400 px-10 py-2 rounded-xl text-white hover:scale-105 transition-all duration-200"
@@ -123,7 +113,7 @@ const Page = () => {
     }
     </div>
     
-    </>
+    </div>
   )
 }
 

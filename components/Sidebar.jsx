@@ -54,16 +54,13 @@ const Sidebar = () => {
     // const {generations}=useMessageArray();
 
   return (
-    <div className="flex flex-col gap-2 h-full bg-gray-900">
-        <Link href="/" className="flex items-center gap-5">
-            <Image height={65} width={65} src="/logo.png" className=" py-5 pl-5 " />
-            <h2 className="text-white text-2xl font-bauhaus">Fusion AI</h2>
-         </Link>
+    <div className="flex flex-col gap-2 h-full bg-[#1f1f1e] border-r border-[rgba(255,255,255,0.16)]">
+        
         <div className="flex flex-col gap-2 pt-6 px-4">
             {
                 links.map((link,index)=>{
                     return(
-                        <Link href={link.href} className={`flex items-center gap-2 px-4 py-3 rounded-xl  ${path===link.href?'bg-gray-600':null} hover:bg-slate-600 duration-200 cursor-pointer`} key={index}>
+                        <Link href={link.href} className={`flex items-center gap-2 px-4 py-3 rounded-xl  ${path===link.href?'bg-gray-600':null} hover:bg-slate-600 duration-200 clickable`} key={index}>
                             <div className={link.color}>
                                 {link.icon}
                             </div>
