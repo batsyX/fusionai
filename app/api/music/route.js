@@ -1,27 +1,24 @@
-import Replicate from "replicate";
 import { NextResponse } from "next/server";
-
+import axios from "axios";
 
 
 
 export  async function POST(req,res) {
-  const replicate = new Replicate({
-    auth: process.env.REPLICATeE_API_TOKEN,
-  });
+  
     try{
       const body=await req.json();
       const {prompt}=body;
-
-      const output = await replicate.run(
-        "meta/musicgen:b05b1dff1d8c6dc63d14b0cdb42135378dcb87f6373b0d3d341ede46e59e2b38",
-        {
-          input: {
-            prompt : prompt,
-            duration: 60,
-          }
+      const options = {
+        method: 'GET',
+        url: 'https://deezerdevs-deezer.p.rapidapi.com/search',
+        params: {q: prompt},
+        headers: {
+          'x-rapidapi-key': process.env.X_RAPIDAPI_KEY,
+          'x-rapidapi-host': process.env.X_RAPIDAPI_HOST
         }
-      );
-      return NextResponse.json(output);
+      };
+      const response = await axios.request(options);
+      return NextResponse.json(response.data);
       
     }catch(error){
        return NextResponse.json(error);

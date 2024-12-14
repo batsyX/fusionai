@@ -60,7 +60,7 @@ const Sidebar = () => {
   return (
     <div className="flex flex-col gap-2 h-full bg-[#1f1f1e] border-r border-[rgba(255,255,255,0.16)] ">
         
-        <div className="flex flex-col gap-2 pt-6 px-4 ">
+        <div className="flex flex-col gap-2 pt-12 px-4 ">
             {
                 links.map((link,index)=>{
                     return(
@@ -76,7 +76,7 @@ const Sidebar = () => {
         </div>
         <div className="w-full flex flex-col gap-4 items-center justify-center py-4 text-gray-400">
                 <div>
-                    <h3>Free plan : <span className={`text-green-400`}>{credits} credits left</span></h3>
+                    <h3>Free plan : <span className={`text-green-400`}>{credits} credit(s) left</span></h3>
                 </div>
                 <div>
                     <button className="px-7 py-2 rounded-xl bg-gradient-to-r from-purple-400 to-blue-400 text-white flex gap-3 items-center">

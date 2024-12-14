@@ -10,15 +10,15 @@ const Layout = ({ children }) => {
   return (
     <MessageArrayProvider>
       <div className="z-20 fixed top-0 w-full bg-[#1f1f1e] border-b border-[rgba(255,255,255,0.16)] h-16 flex items-center justify-between px-3">
-        <div>
-          <Link href="/" className="flex items-center gap-5">
-            <Image
+        <div className="flex gap-5">
+          <Image
               height={65}
               width={65}
               src="/logo.png"
               className=" py-5 pl-5 max-md:hidden"
             />
-            <h2 className="text-white text-2xl font-bauhaus max-md:pl-10">
+          <Link href="/" className="flex items-center gap-5">
+            <h2 className="text-white text-2xl font-bauhaus max-md:pl-12">
               Fusion AI
             </h2>
           </Link>
