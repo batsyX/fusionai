@@ -1,6 +1,6 @@
 "use client"
 import { useMessageArray } from "@/context/MessageArrayContext"
-import { HomeIcon, ImageIcon, MessageSquareIcon, Music2Icon, VideoIcon ,SpeechIcon } from "lucide-react"
+import { HomeIcon, ImageIcon, MessageSquareIcon, Music2Icon, VideoIcon ,SpeechIcon,CrownIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -54,9 +54,9 @@ const Sidebar = () => {
     // const {generations}=useMessageArray();
 
   return (
-    <div className="flex flex-col gap-2 h-full bg-[#1f1f1e] border-r border-[rgba(255,255,255,0.16)]">
+    <div className="flex flex-col gap-2 h-full bg-[#1f1f1e] border-r border-[rgba(255,255,255,0.16)] ">
         
-        <div className="flex flex-col gap-2 pt-6 px-4">
+        <div className="flex flex-col gap-2 pt-6 px-4 ">
             {
                 links.map((link,index)=>{
                     return(
@@ -69,7 +69,17 @@ const Sidebar = () => {
                     )
                 })
             }
-            {/* <h3>{generations}</h3> */}
+        </div>
+        <div className="w-full flex flex-col gap-4 items-center justify-center py-4 text-gray-400">
+                <div>
+                    <h3>Free plan : <span className={`text-green-400`}>10 credits</span></h3>
+                </div>
+                <div>
+                    <button className="px-7 py-2 rounded-xl bg-gradient-to-r from-purple-400 to-blue-400 text-white flex gap-3 items-center">
+                        <CrownIcon className="text-yellow-300" size={20} />
+                        <span className="font-writing text-xl">Upgrade</span>
+                    </button>
+                </div>
         </div>
     </div>
   )

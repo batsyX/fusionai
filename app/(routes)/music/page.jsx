@@ -1,5 +1,5 @@
 "use client"
-import { Music2Icon } from "lucide-react"
+import { AudioWaveformIcon } from "lucide-react"
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import { Skeleton } from "@/components/ui/skeleton"
@@ -55,7 +55,7 @@ const Page = () => {
     <div className="pt-16 text-white">
       <div className="flex gap-2 items-center py-6 px-7">
       <div className="text-purple-600 bg-purple-100 p-3 rounded-xl">
-        <Music2Icon size={32} />
+        <AudioWaveformIcon size={32} />
       </div>
       <div>
         <h1 className="text-2xl font-bauhaus font-bold">Generate Music</h1>

@@ -5,7 +5,7 @@ const FormatMessageContent = (content) => {
   if (content.includes("```")) {
     const code = content.match(/```([\s\S]*?)```/)[1]; // Extract code between ```
     return (
-      <pre className="bg-gray-200 text-black p-4 rounded-md overflow-auto">
+      <pre className="bg-gray-200 text-black  rounded-md overflow-auto ">
         <code>{code}</code>
       </pre>
     );
@@ -17,9 +17,9 @@ const FormatMessageContent = (content) => {
       .split("\n")
       .filter((line) => line.match(/^\d+\.\s|^-|\n-/)); // Only keep list lines
     return (
-      <ul className="list-disc pl-6">
+      <ul className="list-disc ">
         {listItems.map((item, index) => (
-          <li key={index} className="text-lg">
+          <li key={index} className="text-lg ">
             {item.replace(/^\d+\.\s|^-\s/, "")}
           </li>
         ))}

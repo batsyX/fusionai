@@ -50,10 +50,10 @@ const Page = () => {
         with your imagination
         </h1>
       </div>
-      <div className='flex flex-col items-center w-full px-10 pt-10 gap-10 text-white'>
+      <div className='flex flex-col items-center w-full px-10 max-md:px-2 pt-10 gap-10 text-white'>
             <p className='text-center text-lg italic'>Harness the power of artificial intelligence to elevate your projects and streamline your creative process. <br/> Unleash the potential of smart automation and transform your ideas into reality with the help of our state-of-the-art AI tools.</p>
 
-            <div className="w-11/12 flex flex-col gap-7 py-20 px-10 rounded-xl shadow-2xl  shadow-slate-900 mb-10 ring-1 ring-slate-100  ">
+            <div className="w-11/12 max-md:w-full flex flex-col gap-7 py-20 px-10 max-md:px-5 rounded-xl shadow-2xl  shadow-slate-900 mb-10 ring-1 ring-slate-100  ">
             {
                 links.map((link,index)=>{
                     return(

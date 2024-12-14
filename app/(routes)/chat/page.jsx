@@ -3,7 +3,6 @@ import {
   ArrowBigRightIcon,
   BotIcon,
   MessageSquareIcon,
-  User2Icon,
   UserRoundIcon,
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -53,7 +52,7 @@ const Page = () => {
   }, [messageArray]);
 
   return (
-    <div className="pt-16 text-white relative">
+    <div className="pt-16 text-white  min-h-screen ">
       <div className="flex flex-col gap-2 py-6 px-7">
         <div className="flex gap-2 items-center">
           <div className="text-red-500 bg-red-100 p-3 rounded-xl">
@@ -68,7 +67,7 @@ const Page = () => {
         </div>
       </div>
 
-      <div className="px-5 py-16  min-h-32 flex flex-col gap-4">
+      <div className="px-5 pt-16 pb-20 min-h-32 flex flex-col gap-4">
         {messageArray &&
           messageArray.map((message, index) => (
             <div
@@ -80,7 +79,7 @@ const Page = () => {
               } `}
             >
               <div
-                className={`text-${
+                className={` self-end text-${
                   message.role === "user" ? "green" : "red"
                 }-500 bg-${
                   message.role === "user" ? "green" : "red"
@@ -106,7 +105,12 @@ const Page = () => {
             </div>
           ))}
       </div>
-      <div className="sticky bottom-0 left-0 right-0 px-5 bg-[#1f1f1e] py-2">
+      <div className="absolute bottom-10 left-5 right-5">
+          {loading && (
+            <Skeleton className=" h-[30px] w-[300px] rounded-full bg-slate-300" />
+          )}
+        </div>
+      <div className="fixed bottom-0 md:left-80 left-0 right-0 px-5 bg-[#1f1f1e] py-2">
         <form onSubmit={handleSubmit} className="flex items-center gap-4">
           <input
             required
@@ -124,11 +128,7 @@ const Page = () => {
           </button>
         </form>
 
-        <div className="absolute -bottom-14 left-5 right-5">
-          {loading && (
-            <Skeleton className=" h-[30px] w-[300px] rounded-full bg-slate-300" />
-          )}
-        </div>
+        
       </div>
     </div>
   );
