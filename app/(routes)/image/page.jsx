@@ -31,7 +31,7 @@ const Page = () => {
     if(credits==0){
       Swal.fire({
             title: "All free Credits exhausted",
-            text: "Get the premeium plan to get more credits",
+            text: "Get the premium plan to get more credits",
             icon: "warning",
             confirmButtonColor: "#3085d6",
           });

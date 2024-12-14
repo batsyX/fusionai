@@ -25,7 +25,7 @@ const Page = () => {
     if(credits==0){
       Swal.fire({
                   title: "All free Credits exhausted",
-                  text: "Get the premeium plan to get more credits",
+                  text: "Get the premium plan to get more credits",
                   icon: "warning",
                   confirmButtonColor: "#3085d6",
                 });
@@ -61,7 +61,12 @@ const Page = () => {
       localStorage.setItem("messageArray", JSON.stringify(messageArray));
     }
   }, [messageArray]);
-
+  useEffect(() => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth", // Smooth scrolling for better UX
+    });
+  }, [messageArray]); 
   return (
     <div className="pt-16 text-white  min-h-screen ">
       <div className="flex flex-col gap-2 py-6 px-7">
