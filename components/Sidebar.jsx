@@ -1,7 +1,7 @@
 "use client"
 import { HomeIcon, ImageIcon, MessageSquareIcon, Music2Icon, VideoIcon ,SpeechIcon,CrownIcon } from "lucide-react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { redirect, usePathname } from "next/navigation"
 import { useMessageArray } from "@/context/MessageArrayContext"
 import { useEffect } from "react"
 
@@ -50,13 +50,11 @@ const links=[
 
 const Sidebar = () => {
     const path=usePathname();
-    const {credits}=useMessageArray();
+    const {credits,setCredits}=useMessageArray();
 
-    useEffect(()=>{
-        if(credits==0){
-            alert("You have exceeded the limit of generations")
-        }
-    },[credits])
+    const handleUpgrade=()=>{
+        setTimeout(()=>setCredits(1000),3000)
+    }
   return (
     <div className="flex flex-col gap-2 h-full bg-[#1f1f1e] border-r border-[rgba(255,255,255,0.16)] ">
         
@@ -78,12 +76,12 @@ const Sidebar = () => {
                 <div>
                     <h3>Free plan : <span className={`text-green-400`}>{credits} credit(s) left</span></h3>
                 </div>
-                <div>
-                    <button className="px-7 py-2 rounded-xl bg-gradient-to-r from-purple-400 to-blue-400 text-white flex gap-3 items-center">
+                <a href="https://buy.stripe.com/test_aEUaHRc952fmfCw4gg" target="blank">
+                    <button onClick={handleUpgrade} className="px-7 py-2 rounded-xl bg-gradient-to-r from-purple-400 to-blue-400 text-white flex gap-3 items-center">
                         <CrownIcon className="text-yellow-300" size={20} />
-                        <span className="font-writing text-xl">Upgrade</span>
+                        <span className="font-writing text-xl">Buy credits</span>
                     </button>
-                </div>
+                </a>
         </div>
     </div>
   )

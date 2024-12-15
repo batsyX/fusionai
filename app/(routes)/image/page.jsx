@@ -42,7 +42,7 @@ const Page = () => {
       const response =await axios.post('/api/image',{
         prompt:prompt
       })
-      const img=response.data[0].url;
+      const img=response.data.url;
       setImageArray([...imageArray,{url:img}]);
       setCredits((prev)=>prev-1)
     } catch (error) {
@@ -106,9 +106,9 @@ const Page = () => {
     <div className="w-full min-h-96 px-10 py-20 text-center  gap-5 flex flex-wrap flex-shrink ">
     {!loading &&
       imageArray.length>0 &&
-        imageArray.map(image=>(
+        imageArray.map((image,idx)=>(
           
-            <div key={image.url} className=" bg-white bg-opacity-5 rounded-xl flex flex-col py-5 gap-5 items-center justify-center w-[250px]">
+            <div key={idx} className=" bg-white bg-opacity-5 rounded-xl flex flex-col py-5 gap-5 items-center justify-center w-[250px]">
               <img  className="w-[200px] h-[200px] object-cover rounded-xl" src={image.url} alt="image"/>
               <div>
                 <button className="bg-gradient-to-tr from-green-400 to-blue-400 px-10 py-2 rounded-xl text-white hover:scale-105 transition-all duration-200"
