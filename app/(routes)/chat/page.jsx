@@ -95,11 +95,8 @@ const Page = () => {
               } `}
             >
               <div
-                className={` self-end text-${
-                  message.role === "user" ? "green" : "red"
-                }-500 bg-${
-                  message.role === "user" ? "green" : "red"
-                }-100 p-3 rounded-xl `}
+                className={` self-end text-${ message.role === "user" ? "blue" : "red"}-500 
+                bg-${message.role === "user" ? "blue" : "red" }-100 p-3 rounded-xl `}
               >
                 {message.role === "user" ? (
                   <UserRoundIcon size={22} />
@@ -110,7 +107,7 @@ const Page = () => {
               <div
                 className={`flex flex-col gap-1  rounded-t-xl px-3 py-2 ${
                   message.role === "user"
-                    ? "rounded-bl-xl bg-green-600"
+                    ? "rounded-bl-xl bg-blue-600"
                     : "rounded-br-xl bg-gray-600 "
                 }`}
               >

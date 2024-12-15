@@ -12,7 +12,6 @@ const MessageArrayProvider = ({ children }) => {
     const [credits, setCredits] = useState(10);
 
 
-
     return (
         <MessageArrayContext.Provider value={{ messageArray, setMessageArray,imageArray, setImageArray,musicArray,setMusicArray,videoArray,setVideoArray,speechArray,setSpeechArray,credits,setCredits }}>
         {children}
